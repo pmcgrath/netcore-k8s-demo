@@ -1,10 +1,6 @@
-﻿using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 
 namespace webapi.Controllers
@@ -34,7 +30,7 @@ namespace webapi.Controllers
 
 
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult  Get(
+        public IActionResult Get(
             Guid id)
         {
             return base.Ok("value");
@@ -42,16 +38,19 @@ namespace webapi.Controllers
 
 
         [HttpPost]
-        public IActionResult  Post(
+        public IActionResult Post(
             [FromBody] Models.NewContact value)
         {
-            if (!base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
+            if (! base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
 
             var id = Guid.NewGuid();
             var contact = new Models.Contact { Id = id, Name = value.Name, MobileNumber = value.MobileNumber };
 
-            this._logger.LogInformation($"Creating new contact with Id {id}");
+            this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Creating new contact with Id {id}");
             this._repository.Upsert(contact);
+
+            // PENDING - Till we figure out why the correlation-identifier field is getting removed
+            if (value.Name == "ted") { throw new Exception("bang !"); }
 
             return base.CreatedAtRoute("Get", new { id = contact.Id }, contact);
         }
@@ -60,12 +59,12 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(
             Guid id,
-            [FromBody]Models.Contact value)
+            [FromBody] Models.Contact value)
         {
-            if (!base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
+            if (! base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
             if (id != value.Id) { return BadRequest(new { Id = "Id must match the body entity Id" }); }
 
-            this._logger.LogInformation($"Updating contact with Id {id}");
+            this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Updating contact with Id {id}");
             this._repository.Upsert(value);
 
             return base.Ok(value);
@@ -76,10 +75,11 @@ namespace webapi.Controllers
         public IActionResult Delete(
             Guid id)
         {
-            if (!base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
+            // PENDING - Can we use NotFound - 410 instead  ?
+            if (! base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
 
-            this._logger.LogInformation($"Deleteing contact with Id {id}");
-            if (!this._repository.Delete(id)) { return base.NotFound(); }
+            this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Deleteing contact with Id {id}");
+            if (! this._repository.Delete(id)) { return base.NotFound(); }
 
             return base.NoContent();
         }

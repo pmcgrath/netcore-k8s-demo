@@ -16,7 +16,7 @@ namespace webapi
     }
 
 
-    public class InMemoryContactRepository  : IContactRepository
+    public class InMemoryContactRepository : IContactRepository
     {
         private readonly Dictionary<Guid, Models.Contact> _store = new Dictionary<Guid, Models.Contact>();
 
@@ -26,7 +26,7 @@ namespace webapi
         {
             lock(this)
             {
-                if (!this._store.ContainsKey(id)) { return false; }
+                if (! this._store.ContainsKey(id)) { return false; }
 
                 this._store.Remove(id);
                 return true;
@@ -35,20 +35,14 @@ namespace webapi
 
         public IEnumerable<Models.Contact> GetAll()
         {
-            lock(this)
-            {
-                return this._store.Values;
-            }
+            lock(this) { return this._store.Values; }
         }
 
 
         public void Upsert(
             Models.Contact value)
         {
-            lock(this)
-            {
-                this._store[value.Id] = value;
-            }
+            lock(this) { this._store[value.Id] = value; }
         }
     }
 }
