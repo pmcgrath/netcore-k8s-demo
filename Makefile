@@ -1,7 +1,7 @@
 
 
 IMAGE_NAME?=pmcgrath/webapi
-VERSION?=1
+VERSION?=1.1
 
 
 restore:
@@ -17,11 +17,16 @@ run-local:
 
 
 publish:
+	sed -i "s|<Version>.*</Version>|<Version>${VERSION}</Version>|" webapi.csproj
 	dotnet publish --configuration Release --output pub
 
 
-build-docker-image: publish
+docker-build: publish
 	docker image build --build-arg VERSION=${VERSION} --tag ${IMAGE_NAME}:${VERSION} .
 
 
-.PHONY: restore build run-local publish build-docker-image
+docker-push:
+	docker push ${IMAGE_NAME}:${VERSION}
+
+
+.PHONY: restore build run-local publish docker-build docker-push
