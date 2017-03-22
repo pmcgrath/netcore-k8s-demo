@@ -32,9 +32,9 @@ namespace webapi
             ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug((name, level) =>
+            loggerFactory.AddDebug((category, level) =>
                 {
-                    Console.WriteLine($"***** Name: {name},  Level: {level}");
+                    Console.WriteLine($"***** Name: {category},  Level: {level}");
                     return true;
                 });
 
