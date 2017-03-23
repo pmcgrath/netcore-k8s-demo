@@ -12,6 +12,10 @@ build:
 	dotnet build
 
 
+run-local-redis:
+	docker container run --detach --name redis --publish 6379:6379 redis:latest
+
+
 run-local:
 	dotnet run 8000
 

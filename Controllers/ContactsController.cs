@@ -33,7 +33,7 @@ namespace webapi.Controllers
         public IActionResult Get(
             Guid id)
         {
-            return base.Ok("value");
+            return base.Ok(this._repository.Get(id));
         }
 
 
