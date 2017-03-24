@@ -1,6 +1,8 @@
 using StackExchange.Redis;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace webapi
@@ -22,46 +24,36 @@ namespace webapi
 
     public class InMemoryContactRepository : IContactRepository
     {
-        private readonly Dictionary<Guid, Models.Contact> _store = new Dictionary<Guid, Models.Contact>();
+        private readonly ConcurrentDictionary<Guid, Models.Contact> _store = new ConcurrentDictionary<Guid, Models.Contact>();
 
 
         public bool Delete(
             Guid id)
         {
-            lock(this)
-            {
-                if (! this._store.ContainsKey(id)) { return false; }
-
-                this._store.Remove(id);
-                return true;
-            }
+            Models.Contact _;
+            return this._store.TryRemove(id, out _);
         }
 
 
         public Models.Contact Get(
-            Guid id)
-        {
-            return this._store[id];
-        }
+            Guid id) => this._store[id];
 
 
-        public IEnumerable<Models.Contact> GetAll()
-        {
-            lock(this) { return this._store.Values; }
-        }
+        public IEnumerable<Models.Contact> GetAll() => this._store.Values;
 
 
         public void Upsert(
-            Models.Contact value)
-        {
-            lock(this) { this._store[value.Id] = value; }
-        }
+            Models.Contact value) => this._store[value.Id] = value;
     }
 
 
     public class RedisContactRepository : IContactRepository
     {
         private readonly ConnectionMultiplexer _connection;
+
+
+        private IDatabase GetDB(
+            int index = 0) => this._connection.GetDatabase(index);
 
 
         public RedisContactRepository()
@@ -73,24 +65,32 @@ namespace webapi
         public bool Delete(
             Guid id)
         {
-            return this._connection.GetDatabase().KeyDelete(this.GenerateRedisKey(id));
+            return this.GetDB().KeyDelete(this.GenerateRedisKey(id));
         }
 
 
         public Models.Contact Get(
             Guid id)
         {
-            var hash = this._connection.GetDatabase().HashGetAll(this.GenerateRedisKey(id));
+            var hash = this.GetDB().HashGetAll(this.GenerateRedisKey(id));
+            if (hash == null) { return null; }
 
-            return null;
+            return new Models.Contact
+                {
+                    Id = id,
+                    Name = hash.First(item => item.Name == nameof(Models.Contact.Name)).Value,
+                    MobileNumber = hash.First(item => item.Name == nameof(Models.Contact.Name)).Value,
+                };
         }
 
 
         public IEnumerable<Models.Contact> GetAll()
         {
+            this._connection.GetEndPoints()[0].
+
             // PENDING - Ask Hamish
             var id = Guid.NewGuid();
-            var hash = this._connection.GetDatabase().HashGetAll(this.GenerateRedisKey(id));
+            var hash = this.GetDB().HashGetAll(this.GenerateRedisKey(id));
 
             return null;
         }
@@ -99,7 +99,7 @@ namespace webapi
         public void Upsert(
             Models.Contact value)
         {
-            this._connection.GetDatabase().HashSet(
+            this.GetDB().HashSet(
                 this.GenerateRedisKey(value.Id),
                 new HashEntry[]
                 {
