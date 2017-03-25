@@ -17,7 +17,7 @@ namespace webapi
 
         IEnumerable<Models.Contact> GetAll();
 
-        void Upsert(
+        void Save(
             Models.Contact value);
     }
 
@@ -42,13 +42,14 @@ namespace webapi
         public IEnumerable<Models.Contact> GetAll() => this._store.Values;
 
 
-        public void Upsert(
+        public void Save(
             Models.Contact value) => this._store[value.Id] = value;
     }
 
 
     public class RedisContactRepository : IContactRepository
     {
+        private readonly string _keyPrefix;
         private readonly ConnectionMultiplexer _connection;
 
 
@@ -56,9 +57,12 @@ namespace webapi
             int index = 0) => this._connection.GetDatabase(index);
 
 
-        public RedisContactRepository()
+        public RedisContactRepository(
+            string configuraton = "127.0.0.1")      // See https://github.com/StackExchange/StackExchange.Redis/issues/410
         {
-            this._connection = ConnectionMultiplexer.Connect("localhost");
+            this._connection = ConnectionMultiplexer.Connect(configuraton);
+
+            this._keyPrefix = $"{this.GetType().Name}:";
         }
 
 
@@ -86,17 +90,15 @@ namespace webapi
 
         public IEnumerable<Models.Contact> GetAll()
         {
-            this._connection.GetEndPoints()[0].
-
-            // PENDING - Ask Hamish
-            var id = Guid.NewGuid();
-            var hash = this.GetDB().HashGetAll(this.GenerateRedisKey(id));
-
-            return null;
+            return this._connection
+                .GetEndPoints()
+                .Select(endpoint => this._connection.GetServer(endpoint))
+                .SelectMany(server => server.Keys(pattern: $"{this._keyPrefix}*"))
+                .Select(key => this.Get(this.ExtractIdFromKeyRedisKey(key)));
         }
 
 
-        public void Upsert(
+        public void Save(
             Models.Contact value)
         {
             this.GetDB().HashSet(
@@ -110,6 +112,10 @@ namespace webapi
 
 
         private string GenerateRedisKey(
-            Guid id) => $"{this.GetType().Name}:{id}";
+            Guid id) => $"{this._keyPrefix}{id}";
+
+
+        private Guid ExtractIdFromKeyRedisKey(
+            string key) => Guid.Parse(key.Substring(this._keyPrefix.Length));
     }
 }

@@ -47,7 +47,7 @@ namespace webapi.Controllers
             var contact = new Models.Contact { Id = id, Name = value.Name, MobileNumber = value.MobileNumber };
 
             this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Creating new contact with Id {id}");
-            this._repository.Upsert(contact);
+            this._repository.Save(contact);
 
             // PENDING - Till we figure out why the correlation-identifier field is getting removed
             if (value.Name == "ted") { throw new Exception("bang !"); }
@@ -65,7 +65,7 @@ namespace webapi.Controllers
             if (id != value.Id) { return BadRequest(new { Id = "Id must match the body entity Id" }); }
 
             this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Updating contact with Id {id}");
-            this._repository.Upsert(value);
+            this._repository.Save(value);
 
             return base.Ok(value);
         }

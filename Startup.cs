@@ -53,7 +53,8 @@ namespace webapi
                 .AddMvc(options => { options.RespectBrowserAcceptHeader = true; });
                 //.AddXmlSerializerFormatters();
 
-            services.AddSingleton<IContactRepository, InMemoryContactRepository>();
+            //services.AddSingleton<IContactRepository, InMemoryContactRepository>();
+            services.AddSingleton<IContactRepository, RedisContactRepository>();
         }
     }
 }
