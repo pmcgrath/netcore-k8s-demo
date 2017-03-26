@@ -46,11 +46,11 @@ namespace webapi.Controllers
             var id = Guid.NewGuid();
             var contact = new Models.Contact { Id = id, Name = value.Name, MobileNumber = value.MobileNumber };
 
-            this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Creating new contact with Id {id}");
+            this._logger.LogInformation($"Creating new contact with Id {id}");
             this._repository.Save(contact);
 
             // PENDING - Till we figure out why the correlation-identifier field is getting removed
-            if (value.Name == "ted") { throw new Exception("bang !"); }
+//            if (value.Name == "ted") { throw new Exception("bang !"); }
 
             return base.CreatedAtRoute("Get", new { id = contact.Id }, contact);
         }
@@ -64,7 +64,7 @@ namespace webapi.Controllers
             if (! base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
             if (id != value.Id) { return BadRequest(new { Id = "Id must match the body entity Id" }); }
 
-            this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Updating contact with Id {id}");
+            this._logger.LogInformation($"Updating contact with Id {id}");
             this._repository.Save(value);
 
             return base.Ok(value);
@@ -78,7 +78,7 @@ namespace webapi.Controllers
             // PENDING - Can we use NotFound - 410 instead  ?
             if (! base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
 
-            this._logger.LogInformation($"{base.HttpContext.TraceIdentifier} Deleteing contact with Id {id}");
+            this._logger.LogInformation($"Deleteing contact with Id {id}");
             if (! this._repository.Delete(id)) { return base.NotFound(); }
 
             return base.NoContent();

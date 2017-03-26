@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace webapi.Middleware
 {
+    // Waiting on https://github.com/andrasm/prometheus-net/issues/31
     public class Metric
     {
         private readonly RequestDelegate _next;
@@ -29,7 +30,7 @@ namespace webapi.Middleware
             try
             {
                 Console.WriteLine($"Started Metric: {context.Request.Method} on {context.Request.Path}");
-                await _next.Invoke(context);
+                await this._next.Invoke(context);
             }
             catch
             {

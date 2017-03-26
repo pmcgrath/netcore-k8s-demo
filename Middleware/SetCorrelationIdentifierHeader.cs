@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace webapi.Middleware
 {
-    public class CorrelationIdentifier
+    public class SetCorrelationIdentifierHeader
     {
         private readonly RequestDelegate _next;
 
 
-        public CorrelationIdentifier(
+        public SetCorrelationIdentifierHeader(
             RequestDelegate next)
         {
             if (next == null) { throw new ArgumentNullException(nameof(next)); }
@@ -23,22 +23,22 @@ namespace webapi.Middleware
         public async Task Invoke(
             HttpContext context)
         {
-            // This is probably not going to be unique, but it does turn up in all the log entries - ASP.NET entries
-            context.Response.Headers["Correlation-Identifier"] = context.TraceIdentifier;
+            // This is probably not going to be unique ? But it is available on the HttpContext and therefore for all log entries
+            context.Response.Headers["X-Correlation-Id"] = context.TraceIdentifier;
 
-            await _next.Invoke(context);
+            await this._next.Invoke(context);
         }
     }
 
 
-    public static class CorrelationIdentifierExtensions
+    public static class SetCorrelationIdentifierHeaderExtensions
     {
-        public static IApplicationBuilder UseCorrelationIdentifier(
+        public static IApplicationBuilder UseSetCorrelationIdentifierHeader(
             this IApplicationBuilder builder)
         {
             if (builder == null) { throw new ArgumentNullException(nameof(builder)); }
 
-            return builder.Use(next => new CorrelationIdentifier(next).Invoke);
+            return builder.Use(next => new SetCorrelationIdentifierHeader(next).Invoke);
         }
     }
 }

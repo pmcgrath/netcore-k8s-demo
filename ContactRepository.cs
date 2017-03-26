@@ -94,7 +94,7 @@ namespace webapi
                 .GetEndPoints()
                 .Select(endpoint => this._connection.GetServer(endpoint))
                 .SelectMany(server => server.Keys(pattern: $"{this._keyPrefix}*"))
-                .Select(key => this.Get(this.ExtractIdFromKeyRedisKey(key)));
+                .Select(key => this.Get(this.ExtractIdFromRedisKey(key)));
         }
 
 
@@ -115,7 +115,7 @@ namespace webapi
             Guid id) => $"{this._keyPrefix}{id}";
 
 
-        private Guid ExtractIdFromKeyRedisKey(
+        private Guid ExtractIdFromRedisKey(
             string key) => Guid.Parse(key.Substring(this._keyPrefix.Length));
     }
 }

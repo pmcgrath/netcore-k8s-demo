@@ -21,8 +21,9 @@ run-local:
 
 
 publish:
-	sed -i "s|<Version>.*</Version>|<Version>${VERSION}</Version>|" webapi.csproj
-	dotnet publish --configuration Release --output pub
+	# See https://github.com/dotnet/cli/issues/6154
+	dotnet clean --configuration Release
+	dotnet publish --configuration Release --output pub /property:Version=${VERSION}
 
 
 docker-build: publish

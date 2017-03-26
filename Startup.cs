@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
+using Serilog;
 using webapi.Middleware;
 
 
@@ -31,15 +31,22 @@ namespace webapi
             IHostingEnvironment env,
             ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug((category, level) =>
-                {
-                    Console.WriteLine($"***** Name: {category},  Level: {level}");
-                    return true;
-                });
+            // Logging
+            // See  http://blog.getseq.net/asp-net-core-1-0-logging-update/
+            //      https://mderriey.github.io/2016/11/18/correlation-id-with-asp-net-web-api/
+            //      https://github.com/aspnet/Logging/issues/483
+
+            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            // loggerFactory.AddDebug((category, level) =>
+            //     {
+            //         Console.WriteLine($"***** Name: {category},  Level: {level}");
+            //         return true;
+            //     });
+            loggerFactory.AddSerilog();
 
             app.UseMetric();
-            app.UseCorrelationIdentifier();
+            app.UseSetLoggingCorrelationIdentifier();
+            app.UseSetCorrelationIdentifierHeader();
             app.UseMvc();
         }
 
