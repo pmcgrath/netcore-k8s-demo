@@ -1,4 +1,4 @@
-FROM		microsoft/aspnetcore:1.1.1
+FROM		microsoft/dotnet:1.1.1-runtime
 
 ARG 		VERSION=1
 

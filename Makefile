@@ -4,7 +4,8 @@
 SHELL=/bin/bash
 
 
-IMAGE_NAME?=pmcgrath/webapi
+IMAGE_NAME?=webapi
+FULL_IMAGE_NAME?=pmcgrath/${IMAGE_NAME}
 VERSION?=1.1
 
 
@@ -25,10 +26,6 @@ run-local:
 	dotnet run 8000
 
 
-run-local-redis:
-	docker container run --detach --name redis --publish 6379:6379 redis:latest
-
-
 publish:
 	@# See https://github.com/dotnet/cli/issues/6154
 	dotnet clean --configuration Release
@@ -39,12 +36,28 @@ publish:
 
 
 docker-build: publish
-	docker image build --build-arg VERSION=${VERSION} --tag ${IMAGE_NAME}:${VERSION} .
+	docker image build --build-arg VERSION=${VERSION} --tag ${FULL_IMAGE_NAME}:${VERSION} .
+
+
+docker-run-local:
+	docker container run --detach --name ${IMAGE_NAME} --publish 5000:5000 ${FULL_IMAGE_NAME}:${VERSION}
+
+
+docker-stop-local:
+	docker container rm --force ${IMAGE_NAME}
+
+
+docker-run-local-redis:
+	docker container run --detach --name redis --publish 6379:6379 redis:latest
+
+
+docker-stop-local-redis:
+	docker container rm --force redis:latest
 
 
 docker-push:
 	@# Assumes you have logged into dockerhub
-	docker push ${IMAGE_NAME}:${VERSION}
+	docker push ${FULL_IMAGE_NAME}:${VERSION}
 
 
 .PHONY: restore build test run-local run-local-redis publish docker-build docker-push
