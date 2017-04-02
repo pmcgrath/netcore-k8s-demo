@@ -27,7 +27,8 @@ namespace webapi
             var port = 5000;
             if (args != null && args.Length > 1) { port = int.Parse(args[0]); }
 
-            Log.Logger.Information($"Version {Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}");
+            var version = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+            Log.Logger.Information($"Version {version}");
             Log.Logger.Information($"About to start on port {port}");
             var host = new WebHostBuilder()
                 .UseKestrel()
