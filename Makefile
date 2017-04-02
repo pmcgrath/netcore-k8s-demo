@@ -1,5 +1,9 @@
 
 
+# Switch to bash
+SHELL=/bin/bash
+
+
 IMAGE_NAME?=pmcgrath/webapi
 VERSION?=1.1
 
@@ -12,18 +16,26 @@ build:
 	dotnet build
 
 
-run-local-redis:
-	docker container run --detach --name redis --publish 6379:6379 redis:latest
+test:
+	@# dotnet test does not work for a solution file at this time
+	for project in $(shell find test -name *.csproj); do dotnet test $${project}; done
 
 
 run-local:
 	dotnet run 8000
 
 
+run-local-redis:
+	docker container run --detach --name redis --publish 6379:6379 redis:latest
+
+
 publish:
-	# See https://github.com/dotnet/cli/issues/6154
+	@# See https://github.com/dotnet/cli/issues/6154
 	dotnet clean --configuration Release
-	dotnet publish --configuration Release --output pub /property:Version=${VERSION}
+	@# Remove the pub directory as it does not clear any existing content from previous runs
+	[[ -d pub ]] && rm -r pub || true
+	@# We do so for the project, if we do so for the solution it will include the test assemblies which we do not want in the docker image at this time
+	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../pub /property:Version=${VERSION}
 
 
 docker-build: publish
@@ -31,7 +43,8 @@ docker-build: publish
 
 
 docker-push:
+	@# Assumes you have logged into dockerhub
 	docker push ${IMAGE_NAME}:${VERSION}
 
 
-.PHONY: restore build run-local publish docker-build docker-push
+.PHONY: restore build test run-local run-local-redis publish docker-build docker-push
