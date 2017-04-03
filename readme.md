@@ -55,6 +55,11 @@ find
 
 
 
+# VS Code debugging
+- Need to configure a launch task
+- Needed to cater for running debug from the root - solution directory, in which case it cannot find the appSettings files, see http://stackoverflow.com/questions/38986736/config-json-not-being-found-on-asp-net-core-startup-in-debug
+
+
 
 # Pending
 - Authentication middleware
