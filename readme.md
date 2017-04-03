@@ -61,6 +61,19 @@ find
 
 
 
+# Testing
+```
+# Create new contacts
+curl -X POST -H 'Content-Type: application/json' -d '{ "name": "Ted", "MobileNumber": "11" }' http://localhost:5000/contacts
+curl -X POST -H 'Content-Type: application/xml' -d '<NewContact><Name>Toe</Name><MobileNumber>22</MobileNumber></NewContact>' http://localhost:5000/contacts
+
+# Get all
+curl -H 'Accept: application/json' http://localhost:5000/contacts
+curl -H 'Accept: application/xml' http://localhost:5000/contacts
+
+```
+
+
 # Pending
 - Authentication middleware
 - Metrics middleware

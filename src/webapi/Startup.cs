@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ namespace webapi
         public Startup(
             IHostingEnvironment env)
         {
+            // For .SetBasePath see http://stackoverflow.com/questions/38986736/config-json-not-being-found-on-asp-net-core-startup-in-debug
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -57,11 +59,35 @@ namespace webapi
             // Add framework services.
             // See https://docs.microsoft.com/en-us/aspnet/core/mvc/models/formatting
             services
-                .AddMvc(options => { options.RespectBrowserAcceptHeader = true; });
-                //.AddXmlSerializerFormatters();
+                .AddMvc(options => { options.RespectBrowserAcceptHeader = true; })
+                .AddXmlSerializerFormatters();
 
-            //services.AddSingleton<IContactRepository, InMemoryContactRepository>();
-            services.AddSingleton<IContactRepository, RedisContactRepository>();
+            services.AddSingleton<IContactRepository>(this.GetContactRepository());
+        }
+
+
+        private IContactRepository GetContactRepository()
+        {
+            IContactRepository result = null;
+
+            // See https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration
+            switch (this.Configuration["store:type"].ToLower())
+            {
+                case "inmemory":
+                    result = new InMemoryContactRepository();
+                    break;
+
+                case "redis":
+                    result = new RedisContactRepository(this.Configuration["store:connectionString"]);
+                    break;
+
+                default:
+                    Log.Logger.Fatal("No store config that we can use found");
+                    break;
+
+            }
+
+            return result;
         }
     }
 }
