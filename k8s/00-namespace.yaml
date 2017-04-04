@@ -1,0 +1,11 @@
+# See   https://kubernetes.io/docs/api-reference/v1.6/
+#       https://kubernetes.io/docs/api-reference/v1.6/#namespace-v1-core
+#
+
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    product: k8s-demo
