@@ -6,15 +6,15 @@ namespace webapi.Models
     public class Environment
     {
         public readonly string Version;
-        public readonly string MachineName;
+        public readonly string HostName;
 
 
         public Environment(
             string version,
-            string machineName)
+            string hostName)
         {
             this.Version = version;
-            this.MachineName = machineName;
+            this.HostName = hostName;
         }
     }
 }
