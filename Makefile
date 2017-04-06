@@ -60,4 +60,4 @@ docker-push:
 	docker push ${FULL_IMAGE_NAME}:${VERSION}
 
 
-.PHONY: restore build test run-local run-local-redis publish docker-build docker-push
+.PHONY: restore build test run-local publish docker-build docker-run-local docker-stop-local docker-run-local-redis docker-stop-local-redis docker-push
