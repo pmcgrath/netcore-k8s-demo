@@ -1,4 +1,8 @@
-#
+# dotnet
+- .NET standard 2
+	- https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/
+	- https://github.com/dotnet/core-setup/
+
 
 
 # dotnet solution and project setup

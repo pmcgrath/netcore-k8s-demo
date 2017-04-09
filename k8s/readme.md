@@ -1,23 +1,7 @@
-# Minikube installation
+# Install minikube and kubectl
 ```
-# Based on https://github.com/kubernetes/minikube/releases
-version=0.17.1
-curl -Lo /tmp/minikube https://storage.googleapis.com/minikube/releases/v${version}/minikube-linux-amd64 && chmod +x /tmp/minikube && sudo mv /tmp/minikube /usr/local/bin/
-```
-
-
-
-# kubectl installatiom
-```
-echo See http://kubernetes.io/docs/user-guide/prereqs/
-cd /tmp
-curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
-cd -
-
-kubectl version
+./install.sh minikube
+./install.sh kubectl
 ```
 
 
@@ -30,13 +14,17 @@ minikube get-k8s-versions
 # Will use default which is virtualbox
 version=1.6.0
 minikube start --kubernetes-version $version -v 10 | tee minikube-start.log
-minikube cluster-info
+kubectl cluster-info
 ```
 
 
 
 # Start dashboard
 ```
+# With minikube
+minikube dashboard 
+
+# Kubectl
 kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
 # This will block acting as a proxy with security credentials to access the k8s cluster dashboard - will beed to append the /ui/ suffix to see the dashboard
 kubectl proxy

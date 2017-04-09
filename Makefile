@@ -5,6 +5,7 @@ SHELL=/bin/bash
 
 
 IMAGE_NAME?=webapi
+K8S_VERSION?=1.6.0
 FULL_IMAGE_NAME?=pmcgrath/${IMAGE_NAME}
 VERSION?=1.1
 
@@ -60,4 +61,8 @@ docker-push:
 	docker push ${FULL_IMAGE_NAME}:${VERSION}
 
 
-.PHONY: restore build test run-local publish docker-build docker-run-local docker-stop-local docker-run-local-redis docker-stop-local-redis docker-push
+start-minikube:
+	minikube start --kubernetes-version ${K8S_VERSION} -v 10 | tee minikube-start.log
+
+
+.PHONY: restore build test run-local publish docker-build docker-run-local docker-stop-local docker-run-local-redis docker-stop-local-redis docker-push start-minikube
