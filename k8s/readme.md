@@ -22,13 +22,78 @@ kubectl cluster-info
 # Start dashboard
 ```
 # With minikube
-minikube dashboard 
+minikube dashboard
 
 # Kubectl
 kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
 # This will block acting as a proxy with security credentials to access the k8s cluster dashboard - will beed to append the /ui/ suffix to see the dashboard
 kubectl proxy
 ```
+
+
+```
+# Create namespace - Optional but including here anyway
+namespace='dev'
+kubectl create -f ./00-namespace.yaml
+
+
+# Create config map - InMemory initially 
+kubectl create -f 01-webapi-store-configmap.yaml --namespace $namespace
+
+
+# Create web api app deployment
+kubectl create -f 02-webapi-deployment.yaml --namespace $namespace 
+
+
+# Create web api app service
+kubectl create -f 03-webapi-service.yaml --namespace $namespace 
+
+
+# Test
+
+
+# Create redis deployment and internal cluster redis service
+kubectl create -f 04-webapi-redis-store-deploymnent.yaml --namespace $namespace 
+kubectl create -f 05-webapi-redis-store-service.yaml --namespace $namespace 
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+kubectl get pod webapi --namespace $namespace --output yaml
+kubectl get pod webapi --namespace $namespace --output json
+kubectl describe pod po/webapi --namespace $namespace
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,3 +134,11 @@ kubectl get all --all-namespaces
 service_url=$(minikube service webapi --url --namespace $namespace)
 while [ true ]; do date; curl -s -w '\n\n' ${service_url}/environment; sleep 1; done
 ```
+
+
+
+# Start redis store - singular instance behind the service
+
+kubectl apply -f  03-webapi-redis-store-deploymnent.yaml --namespace $namespace
+kubectl apply -f  04-webapi-redis-store-service.yaml --namespace $namespace
+

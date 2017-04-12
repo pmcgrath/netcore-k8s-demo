@@ -33,21 +33,21 @@ cmd-help() {
 	echo
 	cat <<-EOF
 	Help:
-	    $script kubectl
-	        Installs or updates to the latest kubectl
-	    $script minikube [-v version]
+    	$script kubectl
+        	Installs or updates to the latest kubectl
+    	$script minikube [-v version]
 	        Installs or updates minikube
-	    $script help
-	        Show help
-	EOF
+    	$script help
+        	Show help
+EOF
 }
 
 # Main
 script="./${0##*/}"
 command="$1"
 case "$1" in
-	kubectl|ctl) shift;		cmd-install-latest-kubectl "$@" ;;
-	minikube|mk) shift;		cmd-install-minikube "$@" ;;
-	*) command="help";		cmd-help "$@" ;;
+	kubectl|ctl) shift;cmd-install-latest-kubectl "$@" ;;
+	minikube|mk) shift;cmd-install-minikube "$@" ;;
+	*) command="help";cmd-help "$@" ;;
 esac
 exit 0
