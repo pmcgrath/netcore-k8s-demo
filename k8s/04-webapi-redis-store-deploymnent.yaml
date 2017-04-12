@@ -1,0 +1,29 @@
+# See   https://kubernetes.io/docs/api-reference/v1.6/
+#       https://kubernetes.io/docs/api-reference/v1.6/#deployment-v1beta1-apps
+#
+
+# webapi redis store app
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    product: k8s-demo
+  name: webapi-redis-store
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webapi-redis-store
+        product: k8s-demo
+    spec:
+      containers:
+      - name: webapi-redis-store
+        image: redis:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 6379
+        resources:
+          requests:
+            cpu: 100m
+            memory: 30Mi

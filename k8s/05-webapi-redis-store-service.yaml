@@ -1,0 +1,20 @@
+# See   https://kubernetes.io/docs/api-reference/v1.6/
+#       https://kubernetes.io/docs/api-reference/v1.6/#service-v1-core
+#
+
+# webapi service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    product: k8s-demo
+    app: webapi
+  name: webapi-redis-store
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: webapi-redis-store
+  type: ClusterIP
