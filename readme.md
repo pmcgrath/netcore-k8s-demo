@@ -5,7 +5,7 @@
 
 
 
-# dotnet solution and project setup
+# dotnet solution and project setup - This is not being maintained, just so I can quickly find
 # See https://docs.microsoft.com/en-us/dotnet/articles/core/tools/
 ```
 # Repo root dir
@@ -25,6 +25,9 @@ dotnet sln add test/webapi.test/webapi.test.csproj
 
 # Add project reference - test ref src
 dotnet add test/webapi.test/webapi.test.csproj reference src/webapi/webapi.csproj
+
+# Add nuget package reference
+dotnet add src/webapi/webapi.csproj package StackExchange.Redis --version 1.2.1
 
 # Show solution info
 dotnet sln list
@@ -55,6 +58,9 @@ find
 ./test/webapi.test
 ./test/webapi.test/webapi.test.csproj
 ./test/webapi.test/UnitTest1.cs
+
+# Restore so all referenced packages are available locally for building
+dotnet restore
 ```
 
 
