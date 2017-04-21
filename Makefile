@@ -4,10 +4,10 @@
 SHELL=/bin/bash
 
 
-IMAGE_NAME?=webapi
-K8S_VERSION?=1.6.0
-FULL_IMAGE_NAME?=pmcgrath/${IMAGE_NAME}
-VERSION?=1.1
+IMAGE_NAME ?= webapi
+K8S_VERSION ?= 1.6.0
+FULL_IMAGE_NAME ?= pmcgrath/${IMAGE_NAME}
+VERSION ?= 1.0
 
 
 restore:
@@ -24,7 +24,9 @@ test:
 
 
 run-local:
-	dotnet run 8000
+	@# We could have used --project arg rather than cding into the dir, but would have problems with the appSettings files not being found
+	@# Have alos overridden the port to illustrate we can control the port
+	cd src/webapi && dotnet run 8000
 
 
 publish:

@@ -25,7 +25,7 @@ namespace webapi
                 .CreateLogger();
 
             var port = 5000;
-            if (args != null && args.Length > 1) { port = int.Parse(args[0]); }
+            if (args != null && args.Length > 0) { port = int.Parse(args[0]); }
 
             var version = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
             Log.Logger.Information($"Version {version}");

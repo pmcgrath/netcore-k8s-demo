@@ -1,5 +1,5 @@
-using System;
 using Xunit;
+
 
 namespace webapi.test
 {
@@ -8,7 +8,7 @@ namespace webapi.test
         [Fact]
         public void Test1()
         {
-
+            // Nothing yet - just to illustrate tests at this time
         }
     }
 }
