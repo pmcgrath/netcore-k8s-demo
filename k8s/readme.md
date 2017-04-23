@@ -1,3 +1,8 @@
+# Guide
+- See https://kubernetes.io/docs/tutorials/kubernetes-basics/
+
+
+
 # Install minikube and kubectl
 ```
 ./install.sh minikube
@@ -33,7 +38,7 @@ kubectl proxy
 
 ```
 # Create namespace - Optional but including here anyway
-namespace='dev'
+namespace='k8s-demo-dev'
 kubectl create -f ./00-namespace.yaml
 
 

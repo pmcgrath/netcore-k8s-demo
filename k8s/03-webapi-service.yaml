@@ -8,7 +8,6 @@ kind: Service
 metadata:
   labels:
     product: k8s-demo
-    app: webapi
   name: webapi
 spec:
   ports:

@@ -6,6 +6,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: dev
+  name: k8s-demo-dev
   labels:
     product: k8s-demo
+    environment: dev

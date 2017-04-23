@@ -36,9 +36,13 @@ spec:
             memory: 30Mi
         volumeMounts:
           - name: webapi-config
-            mountPath: /app
+            # Waiting on https://github.com/kubernetes/kubernetes/issues/44815 so we can get appsettings file in the /app directory
+            mountPath: /app/config
             readOnly: true
       volumes:
         - name: webapi-config
           configMap:
             name: webapi
+            items:
+              - key: appsettings.json
+                path: appsettings.json
