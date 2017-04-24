@@ -1,5 +1,6 @@
 # Guide
 - See https://kubernetes.io/docs/tutorials/kubernetes-basics/
+- For deployment updates and rollbacks, see https://ryaneschinger.com/blog/rolling-updates-kubernetes-replication-controllers-vs-deployments/
 
 
 

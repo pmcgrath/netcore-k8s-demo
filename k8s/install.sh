@@ -19,7 +19,7 @@ cmd-install-minikube() {
 	local version=0.18.0
 
 	# Overrides, see http://wiki.bash-hackers.org/howto/getopts_tutorial
-	while getopts “:v” option; do
+	while getopts ":" option; do
 		case $option in
 			v) version=$OPTARG ;;
 			\?) exit 1 ;;
