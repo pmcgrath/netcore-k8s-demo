@@ -11,6 +11,8 @@ metadata:
   name: webapi
 spec:
   replicas: 1
+  # This slows things down so we can see changes taking place via the curl loop
+  minReadySeconds: 10
   template:
     metadata:
       labels:

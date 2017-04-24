@@ -148,3 +148,19 @@ while [ true ]; do date; curl -s -w '\n\n' ${service_url}/environment; sleep 1; 
 kubectl apply -f  03-webapi-redis-store-deploymnent.yaml --namespace $namespace
 kubectl apply -f  04-webapi-redis-store-service.yaml --namespace $namespace
 
+
+```
+namespace=k8s-demo-dev
+
+# Scale
+kubectl scale deployments/webapi --replicas=3 --namespace $namespace --record
+
+# Change image
+kubectl set image deployments/webapi webapi=pmcgrath/webapi:2.0 --namespace $namespace --record
+
+# Undo
+kubectl rollout undo deployment/webapi --namespace $namespace
+
+# History
+kubectl describe deployments/webapi --namespace $namespace
+```
