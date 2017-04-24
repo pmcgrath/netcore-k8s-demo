@@ -7,14 +7,17 @@ namespace webapi.Models
     {
         public readonly string Version;
         public readonly string HostName;
+        public readonly DateTime Timestamp;
 
 
         public Environment(
             string version,
-            string hostName)
+            string hostName,
+            DateTime timestamp)
         {
             this.Version = version;
             this.HostName = hostName;
+            this.Timestamp = timestamp;
         }
     }
 }

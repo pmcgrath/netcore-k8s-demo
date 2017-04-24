@@ -14,10 +14,7 @@ done;
 
 
 # Run infinite loop
-seq=1
 while [[ true ]]; do
-	echo $seq
-	curl -w '\n\n' ${service_base_url}/environment
+	curl -w '\n' ${service_base_url}/environment
 	sleep .5s
-	let seq=$((seq + 1))
 done

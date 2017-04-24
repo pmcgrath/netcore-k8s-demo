@@ -13,7 +13,8 @@ namespace webapi.Controllers
         {
             var envInfo = new Models.Environment(
                 Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
-                Environment.MachineName);
+                Environment.MachineName,
+                DateTime.Now.ToUniversalTime());
 
             return base.Ok(envInfo);
         }
