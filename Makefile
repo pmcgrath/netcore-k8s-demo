@@ -25,7 +25,7 @@ test:
 
 run-local:
 	@# We could have used --project arg rather than cding into the dir, but would have problems with the appSettings files not being found
-	@# Have alos overridden the port to illustrate we can control the port
+	@# Have also overridden the port to illustrate we can control the port
 	cd src/webapi && dotnet run 8000
 
 
