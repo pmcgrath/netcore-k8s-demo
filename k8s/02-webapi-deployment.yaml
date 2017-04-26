@@ -38,9 +38,6 @@ spec:
             memory: 30Mi
         volumeMounts:
           - name: webapi-config
-            # If we try to overwrite an exiting file, will get an error, hence the different file name at this time
-            # Could also use an init container as suggested @ https://groups.google.com/forum/#!topic/kubernetes-dev/KzNjg19LZRI
-            # Could try using a poststart hook as suggested @ https://github.com/kubernetes/kubernetes/issues/19764
             # For the subpath see https://github.com/kubernetes/kubernetes/issues/44815 so we can get appsettings file in the /app directory
             mountPath: /app/appsettings.json-Waiting-for-fix
             subPath: appsettings.json
