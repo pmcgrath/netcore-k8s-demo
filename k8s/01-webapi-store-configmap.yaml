@@ -11,5 +11,4 @@ data:
         "type": "InMemory",
         "connectionString": "webapi-redis-store:6379"
       },
-      "some-other-key": "a value"
     }
