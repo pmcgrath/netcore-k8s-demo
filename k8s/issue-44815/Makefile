@@ -9,8 +9,8 @@ docker-push:
 
 
 k8s-apply:
-	kubectl apply -f k8s-yaml
+	kubectl apply -f k8s.yaml
 
 
 k8s-delete:
-	kubectl delete -f k8s-yaml
+	kubectl delete -f k8s.yaml
