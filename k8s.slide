@@ -1,0 +1,91 @@
+K8s demo
+
+
+
+* Agenda
+- Purpose
+- Brief overview of kubernetes
+- What we will cover
+- What we will NOT cover at this time
+- Demo
+
+
+
+* Purpose - Dave should deliver this
+- Very quick demo to make you aware of this option
+- Demonstrate a different way to deliver services
+- Not the only game in town
+- Can use higher level solutions, i.e. DEIS PASS
+- PENDING - Work with Dave here
+
+
+
+* Brief overview of kubernetes - Pat
+- Cluster overview
+	- Master nodes
+	- Worker nodes
+	- Show a diagram
+- Resources
+	- Compute
+	- Memory
+	- Storage
+- Where can you run
+	- Clouds
+	- Private DCs
+		- VMs
+		- Bare metal
+
+
+
+* Brief overview of kubernetes (Continued)
+- Scheduling
+	- Long running services
+	- Batch jobs - short and long running
+	- Statefull
+- Scheduling options
+
+
+
+* What we will cover - Pat outline and Dave points out how this addresses current problems or is a nicer way to deploy services
+- Simple REST based c# app targeting dotnet core 1.1
+- Brief overview of container creation - No CI\CD all on dev box at this time
+
+
+
+* What we will cover (Demo outline)
+- Initial deployment
+	- v1 - 1 instance
+- Scaling up
+	- v1 - 3 instances - decided per service
+- Upgrade to v2
+	- i.e. dotnet 1.0 to 1.1
+	- Extra info in the v2 responses
+	- Dockerhub
+- Rollback to v1
+
+
+
+* What we will cover (Demo outline)
+- Canary a v3
+	- v3 - 1 instance
+- Scale up v3
+	- v3 - 3 instances
+- Remove v1
+- Show history
+- Service VIP
+
+
+* What we will NOT cover
+- k8s installation
+- k8s components
+- Networking
+- Storage
+- Security
+- Federation
+- CI\CD
+- Connecting to existing DC services
+- Can do follow ups if anyone is interested
+
+
+
+* Demo - Pat deliver and Dave again emphasises why this is nicer

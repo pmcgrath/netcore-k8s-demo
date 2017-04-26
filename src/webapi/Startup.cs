@@ -37,7 +37,6 @@ namespace webapi
             // See  http://blog.getseq.net/asp-net-core-1-0-logging-update/
             //      https://mderriey.github.io/2016/11/18/correlation-id-with-asp-net-web-api/
             //      https://github.com/aspnet/Logging/issues/483
-
             // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             // loggerFactory.AddDebug((category, level) =>
             //     {
