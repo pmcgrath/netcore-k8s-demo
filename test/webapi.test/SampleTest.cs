@@ -3,12 +3,14 @@ using Xunit;
 
 namespace webapi.test
 {
-    public class UnitTest1
+    public class SampleTest
     {
         [Fact]
-        public void Test1()
+        public void JustToIllustrate()
         {
             // Nothing yet - just to illustrate tests at this time
+            var n = 1 +1;
+            Assert.True(n == 2, $"Bang ! Wheres my {n}");
         }
     }
 }

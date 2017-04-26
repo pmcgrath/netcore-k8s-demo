@@ -1,16 +1,17 @@
 # Purpose
 This repository contains a simple dotnet core app, so I can demonstrate using kubernetes to manage the same
 
-Not much to see here
+Not much to see here, code wise, just using to illustrate
 
 To view the [k8s.slide](slides) in a browser will need to use the golang [https://godoc.org/golang.org/x/tools/present](slide) tool, just run it from the same folder
 
 
 
 # dotnet
-- Possibly wiser to wait on .NET standard 2 at this time
-	- https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/
-	- https://github.com/dotnet/core-setup/
+- Get [here](https://www.microsoft.com/net/core#linuxubuntu)
+- Possibly wiser to wait on .NET standard 2 at this time, see these links
+	- [Sample dotnet core 2.0 early usage](https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/)
+	- [Core setup](https://github.com/dotnet/core-setup/)
 
 
 
@@ -20,13 +21,13 @@ To view the [k8s.slide](slides) in a browser will need to use the golang [https:
 
 
 # dotnet solution and project setup - This is not being maintained, just so I can quickly find
-# See https://docs.microsoft.com/en-us/dotnet/articles/core/tools/
+# See [tools](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/)
 ```
 # Repo root dir
 mkdir k8s
 cd k8s
 
-# Create solution file
+# Create solution file, will use dir name, can use --name to set a specific name
 dotnet new sln
 
 # Create and add web api project to solution
@@ -79,12 +80,6 @@ dotnet restore
 
 
 
-# VS Code debugging
-- Need to configure a launch task ?
-- Needed to cater for running debug from the root - solution directory, in which case it cannot find the appSettings files, see http://stackoverflow.com/questions/38986736/config-json-not-being-found-on-asp-net-core-startup-in-debug
-
-
-
 # Testing
 ```
 # Create new contacts
@@ -94,7 +89,6 @@ curl -X POST -H 'Content-Type: application/xml' -d '<NewContact><Name>Toe</Name>
 # Get all
 curl -H 'Accept: application/json' http://localhost:5000/contacts
 curl -H 'Accept: application/xml' http://localhost:5000/contacts
-
 ```
 
 
@@ -103,6 +97,6 @@ curl -H 'Accept: application/xml' http://localhost:5000/contacts
 - Authentication middleware
 	- OAuth, OpendID conenct - When I get a chance
 - Metrics middleware
-	- Prometheus, waiting on PRs for the same @ https://github.com/andrasm/prometheus-net
+	- Prometheus, waiting on PRs for the [same](https://github.com/andrasm/prometheus-net)
 - Content negotiation
-	- XmlSerialization, If I get a chance, have included but does not seem to be respecting
+	- XmlSerialization, If I get a chance, have included but does not seem to be respecting Accept header

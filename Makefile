@@ -44,6 +44,13 @@ publish:
 	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../pub /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
 
 
+pack:
+	@# See publish task for explanation
+	dotnet clean --configuration Release
+	[[ -d pub ]] && rm -r pub || true
+	dotnet pack src/webapi --output ../../pub /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
+
+
 docker-build: publish
 	docker image build --build-arg REPO_BRANCH=${REPO_BRANCH} --build-arg REPO_VERSION=${REPO_VERSION} --build-arg VERSION=${VERSION} --tag ${FULL_IMAGE_NAME_AND_TAG} .
 
