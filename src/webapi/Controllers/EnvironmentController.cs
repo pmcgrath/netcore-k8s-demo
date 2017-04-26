@@ -12,6 +12,7 @@ namespace webapi.Controllers
         public IActionResult Get()
         {
             var envInfo = new Models.Environment(
+                Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version,
                 Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
                 Environment.MachineName,
                 DateTime.Now.ToUniversalTime());

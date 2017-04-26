@@ -1,3 +1,8 @@
+# Can regenerate with : find -mindepth 1 -maxdepth 1 -type d | grep -v '^./pub$' | sed -r 's|^(./)(.*)$|\2/|' | LC_ALL=C sort -k 1
+# 	find all sub directories including hidden ones in current directory | exclude .pub directory | remove ./ prefix and add / suffix | sort deterministically
+#
+.git/
+.vscode/
+k8s/
 src/
 test/
-

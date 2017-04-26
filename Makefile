@@ -1,13 +1,19 @@
-
-
 # Switch to bash
 SHELL=/bin/bash
 
 
+# Parameters - defaulted
+DOCKERHUB_REPO_NAME ?= ${USER}
 IMAGE_NAME ?= webapi
 K8S_VERSION ?= 1.6.0
-FULL_IMAGE_NAME ?= pmcgrath/${IMAGE_NAME}
 VERSION ?= 1.0
+
+
+# Derived or calculated
+FULL_IMAGE_NAME = ${DOCKERHUB_REPO_NAME}/${IMAGE_NAME}
+FULL_IMAGE_NAME_AND_TAG = ${FULL_IMAGE_NAME}:${VERSION}
+REPO_BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
+REPO_VERSION ?= $(shell git rev-parse HEAD)
 
 
 restore:
@@ -35,15 +41,15 @@ publish:
 	@# Remove the pub directory as it does not clear any existing content from previous runs
 	[[ -d pub ]] && rm -r pub || true
 	@# We do so for the project, if we do so for the solution it will include the test assemblies which we do not want in the docker image at this time
-	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../pub /property:Version=${VERSION}
+	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../pub /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
 
 
 docker-build: publish
-	docker image build --build-arg VERSION=${VERSION} --tag ${FULL_IMAGE_NAME}:${VERSION} .
+	docker image build --build-arg REPO_BRANCH=${REPO_BRANCH} --build-arg REPO_VERSION=${REPO_VERSION} --build-arg VERSION=${VERSION} --tag ${FULL_IMAGE_NAME_AND_TAG} .
 
 
 docker-run-local:
-	docker container run --detach --name ${IMAGE_NAME} --publish 5000:5000 ${FULL_IMAGE_NAME}:${VERSION}
+	docker container run --detach --name ${IMAGE_NAME} --publish 5000:5000 ${FULL_IMAGE_NAME_AND_TAG}
 
 
 docker-stop-local:
@@ -60,7 +66,7 @@ docker-stop-local-redis:
 
 docker-push:
 	@# Assumes you have logged into dockerhub and have a local up to date docker build
-	docker push ${FULL_IMAGE_NAME}:${VERSION}
+	docker push ${FULL_IMAGE_NAME_AND_TAG}
 
 
 start-minikube:

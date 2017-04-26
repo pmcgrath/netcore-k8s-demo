@@ -2,14 +2,18 @@
 # See http://blog.alexellis.io/mutli-stage-docker-builds/
 FROM		microsoft/dotnet:1.1.1-runtime
 
-ARG 		VERSION=1
+ARG		REPO_BRANCH
+ARG		REPO_VERSION
+ARG		VERSION=1
 
 LABEL		app=webapi-demo
-LABEL  		version=$VERSION
+LABEL		version=$VERSION
+LABEL		repo-branch=$REPO_BRANCH
+LABEL		repo-version=$REPO_VERSION
 
 WORKDIR		/app
-COPY 		pub .
+COPY		pub .
 
-EXPOSE 		5000
+EXPOSE		5000
 
-ENTRYPOINT 	["dotnet", "webapi.dll"]
+ENTRYPOINT	["dotnet", "webapi.dll"]

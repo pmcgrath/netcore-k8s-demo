@@ -1,7 +1,21 @@
+# Purpose
+This repository contains a simple dotnet core app, so I can demonstrate using kubernetes to manage the same
+
+Not much to see here
+
+To view the [k8s.slide](slides) in a browser will need to use the golang [https://godoc.org/golang.org/x/tools/present](slide) tool, just run it from the same folder
+
+
+
 # dotnet
-- .NET standard 2
+- Possibly wiser to wait on .NET standard 2 at this time
 	- https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/
 	- https://github.com/dotnet/core-setup/
+
+
+
+# Kubernetes
+- Will use minikube here, see the K8s directory content
 
 
 
@@ -66,7 +80,7 @@ dotnet restore
 
 
 # VS Code debugging
-- Need to configure a launch task
+- Need to configure a launch task ?
 - Needed to cater for running debug from the root - solution directory, in which case it cannot find the appSettings files, see http://stackoverflow.com/questions/38986736/config-json-not-being-found-on-asp-net-core-startup-in-debug
 
 
@@ -84,12 +98,11 @@ curl -H 'Accept: application/xml' http://localhost:5000/contacts
 ```
 
 
+
 # Pending
 - Authentication middleware
+	- OAuth, OpendID conenct - When I get a chance
 - Metrics middleware
-	- Prometheus
-- XmlSerialization
-- Control logging
-- Redis repository for kubernetes
-- Dockerfile
-- Dockerhub - 2 versions
+	- Prometheus, waiting on PRs for the same @ https://github.com/andrasm/prometheus-net
+- Content negotiation
+	- XmlSerialization, If I get a chance, have included but does not seem to be respecting
