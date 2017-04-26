@@ -8,7 +8,6 @@ K8s demo
 - What we will cover
 - What we will NOT cover at this time
 - Demo
-- Questions
 
 
 
@@ -35,6 +34,10 @@ K8s demo
 	- Private DCs
 		- VMs
 		- Bare metal
+
+
+
+* Brief overview of kubernetes (Continued)
 - Scheduling
 	- Long running services
 	- Batch jobs - short and long running
@@ -46,6 +49,10 @@ K8s demo
 * What we will cover - Pat outline and Dave points out how this addresses current problems or is a nicer way to deploy services
 - Simple REST based c# app targeting dotnet core 1.1
 - Brief overview of container creation - No CI\CD all on dev box at this time
+
+
+
+* What we will cover (Demo outline)
 - Initial deployment
 	- v1 - 1 instance
 - Scaling up
@@ -55,29 +62,30 @@ K8s demo
 	- Extra info in the v2 responses
 	- Dockerhub
 - Rollback to v1
+
+
+
+* What we will cover (Demo outline)
 - Canary a v3
 	- v3 - 1 instance
 - Scale up v3
 	- v3 - 3 instances
 - Remove v1
 - Show history
-- Client relied on a static service VIP
-
+- Service VIP
 
 
 * What we will NOT cover
+- k8s installation
 - k8s components
 - Networking
 - Storage
 - Security
 - Federation
 - CI\CD
+- Connecting to existing DC services
 - Can do follow ups if anyone is interested
 
 
 
 * Demo - Pat deliver and Dave again emphasises why this is nicer
-
-
-
-* Questions
