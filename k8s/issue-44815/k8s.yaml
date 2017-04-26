@@ -32,7 +32,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - name: demo-config
-              mountPath: /app
+              mountPath: /app/settings.json
               subPath: settings.json
       volumes:
         - name: demo-config
