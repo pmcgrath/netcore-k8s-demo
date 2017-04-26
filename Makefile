@@ -59,7 +59,7 @@ docker-stop-local-redis:
 
 
 docker-push:
-	@# Assumes you have logged into dockerhub
+	@# Assumes you have logged into dockerhub and have a local up to date docker build
 	docker push ${FULL_IMAGE_NAME}:${VERSION}
 
 
