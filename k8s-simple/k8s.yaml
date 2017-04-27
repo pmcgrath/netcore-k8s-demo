@@ -1,0 +1,40 @@
+
+
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webapi
+spec:
+  replicas: 3
+  # This slows things down so we can see changes taking place via the curl loop
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: webapi
+    spec:
+      containers:
+      - name: webapi
+        image: pmcgrath/webapi:2.0
+        ports:
+          - containerPort: 5000
+
+
+
+---
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapi
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: webapi
+  type: LoadBalancer

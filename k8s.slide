@@ -50,23 +50,19 @@ K8s demo
 
 * What we will cover (Demo outline)
 - Initial deployment
-	- v1 - 1 instance
+	- v1.0 - 1 instance
 - Scaling up
-	- v1 - 3 instances - decided per service
-- Upgrade to v2
+	- v1.0 - 3 instances - decided per service
+- Upgrade to v1.1
 	- i.e. dotnet 1.0 to 1.1
-	- Extra info in the v2 responses
+	- Extra info in the v1.1 responses
 	- Dockerhub
-- Rollback to v1
+- Rollback to v1.0
 
 
 
 * What we will cover (Demo outline)
-- Canary a v3
-	- v3 - 1 instance
-- Scale up v3
-	- v3 - 3 instances
-- Remove v1
+- Fix and build v1.2
 - Show history
 - Service VIP
 
