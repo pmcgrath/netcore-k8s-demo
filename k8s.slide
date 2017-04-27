@@ -6,24 +6,21 @@ K8s demo
 - Purpose
 - Brief overview of kubernetes
 - What we will cover
-- What we will NOT cover at this time
 - Demo
+- What we have not covered
 
 
 
-* Purpose - Dave should deliver this
-- Very quick demo to make you aware of this option
+* Purpose
+- Outline the problems we currently face and how tools like K8s offer a different approach
 - Demonstrate a different way to deliver services
 - Not the only game in town
 - Can use higher level solutions, i.e. DEIS PASS
-- PENDING - Work with Dave here
 
 
 
-* Brief overview of kubernetes - Pat
+* Brief overview of kubernetes
 - Cluster overview
-	- Master nodes
-	- Worker nodes
 	- Show a diagram
 - Resources
 	- Compute
@@ -41,12 +38,11 @@ K8s demo
 - Scheduling
 	- Long running services
 	- Batch jobs - short and long running
-	- Statefull
-- Scheduling options
+	- Stateful
 
 
 
-* What we will cover - Pat outline and Dave points out how this addresses current problems or is a nicer way to deploy services
+* What we will cover
 - Simple REST based c# app targeting dotnet core 1.1
 - Brief overview of container creation - No CI\CD all on dev box at this time
 
@@ -75,7 +71,12 @@ K8s demo
 - Service VIP
 
 
-* What we will NOT cover
+
+* Demo
+
+
+
+* What we haven't covered
 - k8s installation
 - k8s components
 - Networking
@@ -85,7 +86,3 @@ K8s demo
 - CI\CD
 - Connecting to existing DC services
 - Can do follow ups if anyone is interested
-
-
-
-* Demo - Pat deliver and Dave again emphasises why this is nicer
