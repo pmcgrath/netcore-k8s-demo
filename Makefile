@@ -36,6 +36,7 @@ run-local:
 
 
 publish:
+	@# Can also set env vars and msbuild will pick up, would not need to pass explicilty as we do here
 	@# See https://github.com/dotnet/cli/issues/6154
 	dotnet clean --configuration Release
 	@# Remove the pub directory as it does not clear any existing content from previous runs
