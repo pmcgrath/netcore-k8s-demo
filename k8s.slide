@@ -1,4 +1,5 @@
 K8s demo
+http://somewhere
 
 
 
@@ -15,30 +16,29 @@ K8s demo
 - Outline the problems we currently face and how tools like K8s offer a different approach
 - Demonstrate a different way to deliver services
 - Not the only game in town
-- Can use higher level solutions, i.e. DEIS PASS
+- Can use higher level solutions, i.e. DEIS, OpenShift, Tectonic, CloudFoundry
 
 
 
 * Brief overview of kubernetes
 - Cluster overview
-	- Show a diagram
 - Resources
-	- Compute
-	- Memory
-	- Storage
+	Compute
+	Memory
+	Storage
 - Where can you run
-	- Clouds
-	- Private DCs
-		- VMs
-		- Bare metal
+	Clouds
+	Private DCs
+		VMs
+		Bare metal
 
 
 
 * Brief overview of kubernetes (Continued)
 - Scheduling
-	- Long running services
-	- Batch jobs - short and long running
-	- Stateful
+	Long running services
+	Batch jobs - short and long running
+	Stateful
 
 
 
@@ -50,13 +50,14 @@ K8s demo
 
 * What we will cover (Demo outline)
 - Initial deployment
-	- v1.0 - 1 instance
+	v1.0 - 1 instance
 - Scaling up
-	- v1.0 - 3 instances - decided per service
+	v1.0 - 3 instances - decided per service
 - Upgrade to v1.1
-	- i.e. dotnet 1.0 to 1.1
-	- Extra info in the v1.1 responses
-	- Dockerhub
+	i.e. dotnet 1.0 to 1.1
+	Extra info in the v1.1 responses
+	Demo local curl call
+	Build and push to Dockerhub
 - Rollback to v1.0
 
 
@@ -68,7 +69,35 @@ K8s demo
 
 
 
+* What we will cover (Demo preparation)
+- minikube
+- minikube dashboard
+
+
+
 * Demo
+	# Initial deployment
+	cd ./k8s-simple
+	kubectl apply -f k8s.yaml --record
+
+	# Start curl loop
+	svc_base_url=$(minikube service webapi --url)
+	while [[ true ]]; do curl -w '\n' ${svc_base_url}/environment ; sleep 1s; done
+
+	# Scale up - edit and set replicas to 3
+	kubectl apply -f k8s.yaml --record
+
+	# Upgrade to v1.1 - edit and set image tag
+	kubectl apply -f k8s.yaml --record
+
+	# Oh no, rollback
+	kubectl rollout undo deployment/webapi
+
+	# Fix and move to 1.2 - edit and set image tag
+	kubectl apply -f k8s.yaml --record
+
+	# Show history
+	kubectl history webapi
 
 
 
@@ -81,4 +110,4 @@ K8s demo
 - Federation
 - CI\CD
 - Connecting to existing DC services
-- Can do follow ups if anyone is interested
+- Can do follow up if anyone is interested
