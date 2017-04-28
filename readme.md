@@ -24,11 +24,11 @@ To view the [k8s.slide](slides) in a browser will need to use the golang [https:
 # See [tools](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/)
 ```
 # Repo root dir
-mkdir k8s
-cd k8s
+mkdir netcore-k8s-demo
+cd netcore-k8s-demo
 
-# Create solution file, will use dir name, can use --name to set a specific name
-dotnet new sln
+# Create solution file
+dotnet new sln --name webapi
 
 # Create and add web api project to solution
 dotnet new webapi --output src/webapi
@@ -58,7 +58,7 @@ test/webapi.test/webapi.test.csproj
 find
 
 .
-./k8s.sln
+./webapi.sln
 ./src
 ./src/webapi
 ./src/webapi/appsettings.json
