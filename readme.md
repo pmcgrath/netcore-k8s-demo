@@ -7,7 +7,7 @@ To view the [k8s.slide](slides) in a browser will need to use the golang [https:
 
 
 
-# dotnet
+# dotnet as of May 2016
 - Get [here](https://www.microsoft.com/net/core#linuxubuntu)
 - Possibly wiser to wait on .NET standard 2 at this time, see these links
 	- [Sample dotnet core 2.0 early usage](https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/)
@@ -16,12 +16,16 @@ To view the [k8s.slide](slides) in a browser will need to use the golang [https:
 
 
 # Kubernetes
-- Will use minikube here, see the K8s directory content
+- Will use minikube here, see the k8s directory content
 
 
 
-# dotnet solution and project setup - This is not being maintained, just so I can quickly find
-# See [tools](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/)
+# dotnet solution and project setup
+
+This is not being maintained, just so I can quickly find
+
+See [tools](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/)
+
 ```
 # Repo root dir
 mkdir netcore-k8s-demo
@@ -81,6 +85,8 @@ dotnet restore
 
 
 # Testing
+Just using curl to demonstrate
+
 ```
 # Create new contacts
 curl -X POST -H 'Content-Type: application/json' -d '{ "name": "Ted", "MobileNumber": "11" }' http://localhost:5000/contacts

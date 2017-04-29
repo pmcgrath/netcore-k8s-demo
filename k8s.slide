@@ -77,24 +77,24 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 * Demo
 	# Initial deployment
-	cd ./k8s-simple
-	kubectl apply -f k8s.yaml --record
+	cd ./k8s
+	kubectl apply -f k8s-simple.yaml --record
 
 	# Start curl loop
 	svc_base_url=$(minikube service webapi --url)
 	while [[ true ]]; do curl -w '\n' ${svc_base_url}/environment ; sleep 1s; done
 
 	# Scale up - edit and set replicas to 3
-	kubectl apply -f k8s.yaml --record
+	kubectl apply -f k8s-simple.yaml --record
 
 	# Upgrade to v1.1 - edit and set image tag
-	kubectl apply -f k8s.yaml --record
+	kubectl apply -f k8s-simple.yaml --record
 
 	# Oh no, rollback
 	kubectl rollout undo deployment/webapi
 
 	# Fix and move to 1.2 - edit and set image tag
-	kubectl apply -f k8s.yaml --record
+	kubectl apply -f k8s-simple.yaml --record
 
 	# Show history
 	kubectl history webapi
