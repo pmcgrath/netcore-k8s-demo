@@ -156,7 +156,7 @@ namespace=k8s-demo-dev
 kubectl scale deployments/webapi --replicas=3 --namespace $namespace --record
 
 # Change image
-kubectl set image deployments/webapi webapi=pmcgrath/webapi:2.0 --namespace $namespace --record
+kubectl set image deployments/webapi webapi=pmcgrath/webapi:1.1 --namespace $namespace --record
 
 # Undo
 kubectl rollout undo deployment/webapi --namespace $namespace

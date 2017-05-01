@@ -6,7 +6,7 @@ kind: Deployment
 metadata:
   name: webapi
 spec:
-  replicas: 3
+  replicas: 1
   # This slows things down so we can see changes taking place via the curl loop
   minReadySeconds: 10
   template:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webapi
-        image: pmcgrath/webapi:2.0
+        image: pmcgrath/webapi:1.0
         ports:
           - containerPort: 5000
 
