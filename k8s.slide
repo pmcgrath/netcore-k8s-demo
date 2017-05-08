@@ -22,6 +22,11 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 * Brief overview of kubernetes
 - Cluster overview
+.image https://cdn.thenewstack.io/media/2016/11/Chart_02_Kubernetes-Architecture.png
+
+
+
+* Brief overview of kubernetes (Continued)
 - Resources
 	Compute
 	Memory
@@ -72,6 +77,8 @@ https://github.com/pmcgrath/netcore-k8s-demo
 * What we will cover (Demo preparation)
 - minikube
 - minikube dashboard
+# minikube dashboard
+# minikube proxy - Can now browse the API
 
 
 
