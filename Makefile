@@ -60,6 +60,10 @@ docker-run-local:
 	docker container run --detach --name ${IMAGE_NAME} --publish 5000:5000 ${FULL_IMAGE_NAME_AND_TAG}
 
 
+docker-logs:
+	docker container logs ${IMAGE_NAME}
+
+
 docker-stop-local:
 	docker container rm --force ${IMAGE_NAME}
 
@@ -81,4 +85,6 @@ start-minikube:
 	minikube start --kubernetes-version ${K8S_VERSION} -v 10 | tee minikube-start.log
 
 
-.PHONY: restore build test run-local publish docker-build docker-run-local docker-stop-local docker-run-local-redis docker-stop-local-redis docker-push start-minikube
+update-all-packages:
+	# PENDING - Need to figure out makefile escaping
+	$(shell find . -name '*.*proj' | xargs -n1 bash -c 'proj_file=${0}; grep "PackageReference Include" ${proj_file} | cut -d "\"" -f 2 | xargs -n1 dotnet add ${proj_file} package ')

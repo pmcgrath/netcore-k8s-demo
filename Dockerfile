@@ -1,6 +1,6 @@
 # Look into multi-stage builds so we can do the build from within a dockerfile rather than manually doing so or requiring dotnet on the host
 # See http://blog.alexellis.io/mutli-stage-docker-builds/
-FROM		microsoft/dotnet:1.1.1-runtime
+FROM		microsoft/dotnet:1.1.2-runtime
 
 ARG		REPO_BRANCH
 ARG		REPO_VERSION
