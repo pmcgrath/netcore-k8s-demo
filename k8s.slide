@@ -21,6 +21,7 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 
 * Brief overview of kubernetes
+- Google borg origin
 - Cluster overview
 .image https://cdn.thenewstack.io/media/2016/11/Chart_02_Kubernetes-Architecture.png 500 500
 
@@ -44,6 +45,8 @@ https://github.com/pmcgrath/netcore-k8s-demo
 	Long running services
 	Batch jobs - short and long running
 	Stateful
+	SSD
+	GPU
 
 
 
@@ -74,11 +77,9 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 
 
-* What we will cover (Demo preparation)
+* Demo preparation
 - minikube
 - minikube dashboard
-# minikube dashboard
-# minikube proxy - Can now browse the API
 
 
 

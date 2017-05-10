@@ -49,13 +49,8 @@ namespace webapi.Controllers
             this._logger.LogInformation($"Creating new contact with Id {id}");
             this._repository.Save(contact);
 
-            // PENDING - Till we figure out why the correlation-identifier field is getting removed
-//            if (value.Name == "ted") { throw new Exception("bang !"); }
-
             return base.CreatedAtRoute("Get", new { id = contact.Id }, contact);
         }
-
-
 
 
         [HttpPut("{id}")]
@@ -77,7 +72,6 @@ namespace webapi.Controllers
         public IActionResult Delete(
             Guid id)
         {
-            // PENDING - Can we use NotFound - 410 instead  ?
             if (! base.ModelState.IsValid) { return base.BadRequest(base.ModelState); }
 
             this._logger.LogInformation($"Deleteing contact with Id {id}");
