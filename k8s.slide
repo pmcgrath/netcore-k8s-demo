@@ -105,7 +105,8 @@ https://github.com/pmcgrath/netcore-k8s-demo
 	kubectl apply -f k8s-simple.yaml --record
 
 	# Show history
-	kubectl history webapi
+	kubectl rollout history deployment webapi
+	kubectl rollout history -f k8s-simple.yaml
 
 
 
