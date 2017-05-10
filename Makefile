@@ -21,6 +21,7 @@ restore:
 
 
 build:
+	@# Will be in Debug configuration - enough to see compilation issues
 	dotnet build
 
 
@@ -39,17 +40,17 @@ publish:
 	@# Can also set env vars and msbuild will pick up, would not need to pass explicilty as we do here
 	@# See https://github.com/dotnet/cli/issues/6154
 	dotnet clean --configuration Release
-	@# Remove the pub directory as it does not clear any existing content from previous runs
-	[[ -d pub ]] && rm -r pub || true
+	@# Remove the bin directory as it does not clear any existing content from previous runs
+	[[ -d bin ]] && rm -r bin || true
 	@# We do so for the project, if we do so for the solution it will include the test assemblies which we do not want in the docker image at this time
-	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../pub /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
+	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../bin /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
 
 
 pack:
 	@# See publish task for explanation
 	dotnet clean --configuration Release
-	[[ -d pub ]] && rm -r pub || true
-	dotnet pack src/webapi --output ../../pub /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
+	[[ -d bin ]] && rm -r bin || true
+	dotnet pack src/webapi --output ../../bin /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
 
 
 docker-build: publish

@@ -1,7 +1,6 @@
 # dotnet build\publish content
 bin/
 obj/
-pub/
 
 # minikube start log
 minikube-start.log

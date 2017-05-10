@@ -12,7 +12,7 @@ LABEL		repo-branch=$REPO_BRANCH
 LABEL		repo-version=$REPO_VERSION
 
 WORKDIR		/app
-COPY		pub .
+COPY		bin .
 
 EXPOSE		5000
 

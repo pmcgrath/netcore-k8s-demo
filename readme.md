@@ -22,7 +22,7 @@ To view the [k8s.slide](slides) in a browser will need to use the golang [https:
 
 # dotnet solution and project setup
 
-This is not being maintained, just so I can quickly find
+This is not being maintained, just so I can quickly reference
 
 See [tools](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/)
 
@@ -45,7 +45,7 @@ dotnet sln add test/webapi.test/webapi.test.csproj
 # Add project reference - test ref src
 dotnet add test/webapi.test/webapi.test.csproj reference src/webapi/webapi.csproj
 
-# Add nuget package reference
+# Add nuget package reference for external package
 dotnet add src/webapi/webapi.csproj package StackExchange.Redis --version 1.2.1
 
 # Show solution info
