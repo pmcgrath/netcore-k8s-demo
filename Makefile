@@ -87,5 +87,5 @@ start-minikube:
 
 
 update-all-packages:
-	# PENDING - Need to figure out makefile escaping
-	$(shell find . -name '*.*proj' | xargs -n1 bash -c 'proj_file=${0}; grep "PackageReference Include" ${proj_file} | cut -d "\"" -f 2 | xargs -n1 dotnet add ${proj_file} package ')
+	# This is potentially dangerous
+	find . -name '*.*proj' | xargs -n1 bash -c 'proj_file=$${0}; grep "PackageReference Include" $${proj_file} | cut -d "\"" -f 2 | xargs -n1 dotnet add $${proj_file} package '
