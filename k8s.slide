@@ -5,29 +5,54 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 * Agenda
 - Purpose
-- Brief overview of kubernetes
-- What we will cover
+- Issues we want to address
+- What is Kubernetes?
+- What we will cover?
 - Demo
 - What we have not covered
 
 
 
 * Purpose
-- Outline the problems we currently face and how tools like K8s offer a different approach
-- Demonstrate a different way to deliver services
+- Demonstrate a different way to deliver services addressing current issues
 - Not the only game in town
 - Can use higher level solutions, i.e. DEIS, OpenShift, Tectonic, CloudFoundry
 
 
 
-* Brief overview of kubernetes
-- Google borg origin
+* Issues we want to address
+- Predictable, repeatable and largely automatic releases.
+- Application dependency management like framework version, IIS version etc. (really a container benefit)
+- Self service for developers
+- Infrastructure as code, can be pushed through a deployment pipeline like binaries.
+- Ability to easily run multiple environments, if that is a good thing.
+- Elastic scaling, could for instance use web resource to run batch jobs when not busy.
+- Resource utilisation, requested and managed in an open an accountable way.
+
+
+
+* What is Kubernetes?
 - Cluster overview
 .image https://cdn.thenewstack.io/media/2016/11/Chart_02_Kubernetes-Architecture.png 500 500
 
 
 
-* Brief overview of kubernetes (Continued)
+* What is Kubernetes? (Continued)
+- Container scheduling
+- Designed by Google and donated to CNCF
+- Supports a range of container tools
+- Heavily influenced by Google's Borg system. Founders of Kubernetes all worked on Borg.
+- Builds on 15 years of container use at Google. Google run billions of containers a week.
+- Defines a set of primitives for deploying, maintaining and scaling applications.
+
+
+
+* What is Kubernetes? (Continued)
+- Not NoOps
+
+
+
+* What is Kubernetes? (Continued)
 - Resources
 	Compute
 	Memory
@@ -40,7 +65,7 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 
 
-* Brief overview of kubernetes (Continued)
+* What is Kubernetes? (Continued)
 - Scheduling
 	Long running services
 	Batch jobs - short and long running
@@ -50,7 +75,7 @@ https://github.com/pmcgrath/netcore-k8s-demo
 
 
 
-* What we will cover
+* What we will cover?
 - Simple REST based c# app targeting dotnet core 1.1
 - Brief overview of container creation - No CI\CD all on dev box at this time
 
