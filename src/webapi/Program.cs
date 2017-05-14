@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
 using Serilog;
 using System.IO;
 using System.Reflection;
@@ -24,19 +25,20 @@ namespace webapi
                 .WriteTo.ColoredConsole(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level} - {SourceContext} - {CorrelationId}] {Message}{Exception}{NewLine}")
                 .CreateLogger();
 
+            // Needed to use --port "" style as we use WebHost.CreateDefaultBuilder below which will end up parsing any command line args
+            // See https://github.com/aspnet/Configuration/blob/dev/src/Microsoft.Extensions.Configuration.CommandLine/CommandLineConfigurationProvider.cs
             var port = 5000;
-            if (args != null && args.Length > 0) { port = int.Parse(args[0]); }
+            if (args != null && args.Length >= 2 && args[0] == "--port") { port = int.Parse(args[1]); }
 
             var version = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
             Log.Logger.Information($"Version {version}");
             Log.Logger.Information($"About to start on port {port}");
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()                                    // PENDING - Do we need this ?
+            // See https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs
+            var host = WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseUrls($"http://*:{port}")
                 .Build();
+
             host.Run();
         }
     }

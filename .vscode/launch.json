@@ -6,18 +6,18 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/webapi/bin/Debug/netcoreapp1.1/webapi.dll",
+            "program": "${workspaceRoot}/src/webapi/bin/Debug/netcoreapp2.0/webapi.dll",
             "args": [],
             "cwd": "${workspaceRoot}/src/webapi",
             "stopAtEntry": false,
-            "externalConsole": false
+            "console": "internalConsole"
         },
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/webapi/bin/Debug/netcoreapp1.1/webapi.dll",
+            "program": "${workspaceRoot}/src/webapi/bin/Debug/netcoreapp2.0/webapi.dll",
             "args": [],
             "cwd": "${workspaceRoot}/src/webapi",
             "stopAtEntry": false,
@@ -46,7 +46,7 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",
-            "processId": "${command.pickProcess}"
+            "processId": "${command:pickProcess}"
         }
     ]
 }

@@ -3,13 +3,16 @@ This repository contains a simple dotnet core app, so I can demonstrate using ku
 
 Not much to see here, code wise, just using to illustrate
 
+NOTE: This is using a preview of netcore 2.0 at this time
+
 To view the [k8s.slide](slides) in a browser will need to use the golang [https://godoc.org/golang.org/x/tools/present](slide) tool, just run it from the same folder
 
 
 
 # dotnet as of May 2016
-- Get [here](https://www.microsoft.com/net/core#linuxubuntu)
-- Possibly wiser to wait on .NET standard 2 at this time, see these links
+- Get [here](hhttps://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-preview1-download.md)
+- See [here](https://blogs.msdn.microsoft.com/dotnet/2017/05/10/announcing-net-core-2-0-preview-1/) for netcore 2.0 preview info
+- Possibly wiser to wait fo the .NET standard 2 release at this time, see these links
 	- [Sample dotnet core 2.0 early usage](https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/)
 	- [Core setup](https://github.com/dotnet/core-setup/)
 
@@ -46,7 +49,7 @@ dotnet sln add test/webapi.test/webapi.test.csproj
 dotnet add test/webapi.test/webapi.test.csproj reference src/webapi/webapi.csproj
 
 # Add nuget package reference for external package
-dotnet add src/webapi/webapi.csproj package StackExchange.Redis --version 1.2.1
+dotnet add src/webapi/webapi.csproj package StackExchange.Redis --version 1.2.3
 
 # Show solution info
 dotnet sln list
@@ -78,7 +81,7 @@ find
 ./test/webapi.test/webapi.test.csproj
 ./test/webapi.test/UnitTest1.cs
 
-# Restore so all referenced packages are available locally for building
+# Restore so all referenced packages are available locally for building - Seems to be redundant since 2.0 - but may need if pulling from a remote
 dotnet restore
 ```
 
@@ -89,12 +92,12 @@ Just using curl to demonstrate
 
 ```
 # Create new contacts
-curl -X POST -H 'Content-Type: application/json' -d '{ "name": "Ted", "MobileNumber": "11" }' http://localhost:5000/contacts
-curl -X POST -H 'Content-Type: application/xml' -d '<NewContact><Name>Toe</Name><MobileNumber>22</MobileNumber></NewContact>' http://localhost:5000/contacts
+curl -s -X POST -H 'Content-Type: application/json' -d '{ "name": "Ted", "MobileNumber": "11" }' http://localhost:5000/contacts | jq .
+curl -s -X POST -H 'Content-Type: application/xml' -d '<NewContact><Name>Toe</Name><MobileNumber>22</MobileNumber></NewContact>' http://localhost:5000/contacts | jq .
 
 # Get all
-curl -H 'Accept: application/json' http://localhost:5000/contacts
-curl -H 'Accept: application/xml' http://localhost:5000/contacts
+curl -s -H 'Accept: application/json' http://localhost:5000/contacts | jq .
+curl -s -H 'Accept: application/xml' http://localhost:5000/contacts
 ```
 
 
