@@ -80,9 +80,6 @@ find
 ./test/webapi.test
 ./test/webapi.test/webapi.test.csproj
 ./test/webapi.test/UnitTest1.cs
-
-# Restore so all referenced packages are available locally for building - Seems to be redundant since 2.0 - but may need if pulling from a remote
-dotnet restore
 ```
 
 
