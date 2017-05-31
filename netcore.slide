@@ -1,0 +1,75 @@
+dotnet core introduction
+https://github.com/pmcgrath/netcore-k8s-demo
+
+
+
+* Agenda
+- Purpose
+- v2.0
+- Install preview
+- Run some apps - console and webapi
+- Install VS code
+- Debug
+- Documentation
+
+
+
+* Purpose
+- Introduction to dotnet core
+- Simple examples
+
+
+
+* v2.0
+- Standard - https://github.com/dotnet/standard/blob/master/docs/netstandard-20/README.md
+- App to report porting coverage - https://github.com/Microsoft/dotnet-apiport
+- API checker - https://docs.microsoft.com/en-us/dotnet/api/?view=netcore-2.0
+- Run cross platform
+- All nuget based and potentially xcopy
+- Run in docker containers - See newsvc makefile for web in particular
+
+
+
+* Install preview
+- Stable - https://www.microsoft.com/net/download/core
+- Preview - https://www.microsoft.com/net/core/preview#windowscmd
+
+
+
+* Run some apps - console and webapi
+```
+dotnet help
+dotnet new help
+
+mkdir app1 && cd app1
+dotnet new console
+dotnet run
+
+cd ..
+mkdir app2 && cd app2
+dotnet new webapi
+dotnet run
+
+curl localhost:5000/api/controllers
+
+
+dotnet publish help
+```
+
+
+
+* Install VS code
+- See https://code.visualstudio.com/
+- Cross platform also 
+- C# extension
+
+
+
+* Debug
+- Run console or webapi with breakpoint
+
+
+
+* Links
+- See documentation @ https://docs.microsoft.com/en-us/aspnet/core/
+- See newsvc @ http://stash/projects/API/repos/newsvc
