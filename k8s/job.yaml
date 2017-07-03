@@ -1,5 +1,5 @@
-# See   https://kubernetes.io/docs/api-reference/v1.6/
-#        https://kubernetes.io/docs/api-reference/v1.6/#job-v1-batch
+# See   https://kubernetes.io/docs/api-reference/v1.7/
+#       https://kubernetes.io/docs/api-reference/v1.7/#job-v1-batch
 
 apiVersion: batch/v1
 kind: Job
