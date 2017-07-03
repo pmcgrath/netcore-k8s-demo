@@ -5,7 +5,7 @@ SHELL=/bin/bash
 # Parameters - defaulted
 DOCKERHUB_REPO_NAME ?= ${USER}
 IMAGE_NAME ?= webapi
-K8S_VERSION ?= 1.6.0
+K8S_VERSION ?= 1.7.0
 VERSION ?= 1.0
 
 
@@ -15,9 +15,6 @@ FULL_IMAGE_NAME_AND_TAG = ${FULL_IMAGE_NAME}:${VERSION}
 REPO_BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 REPO_VERSION ?= $(shell git rev-parse HEAD)
 
-
-restore:
-	dotnet restore
 
 
 build:
@@ -58,6 +55,7 @@ docker-build: publish
 
 
 docker-run-local:
+	@# We can't use --read-only - dotnet seems to need to write content to file system
 	docker container run --detach --name ${IMAGE_NAME} --publish 5000:5000 ${FULL_IMAGE_NAME_AND_TAG}
 
 
