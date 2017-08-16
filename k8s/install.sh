@@ -16,7 +16,7 @@ cmd-install-latest-kubectl() {
 
 cmd-install-minikube() {
 	# See https://github.com/kubernetes/minikube/releases
-	local version=0.18.0
+	local version=0.21.0
 
 	# Overrides, see http://wiki.bash-hackers.org/howto/getopts_tutorial
 	while getopts ":" option; do

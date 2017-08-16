@@ -1,0 +1,7 @@
+﻿<Project>
+  <PropertyGroup>
+    <GenerateUserSecretsAttribute>false</GenerateUserSecretsAttribute>
+    <Product>WebApi Demo</Product>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

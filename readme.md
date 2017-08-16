@@ -3,19 +3,12 @@ This repository contains a simple dotnet core app, so I can demonstrate using ku
 
 Not much to see here, code wise, just using to illustrate
 
-NOTE: This is using a preview of netcore 2.0 at this time
-
 To view the [k8s.slide](slides) in a browser will need to use the golang [https://godoc.org/golang.org/x/tools/present](slide) tool, just run it from the same folder
 
 
 
-# dotnet as of July 2016
-- Get [here](https://www.microsoft.com/net/core/preview#linuxubuntu) or [here](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-preview2-download.md)
-- See [here](https://blogs.msdn.microsoft.com/dotnet/2017/06/28/announcing-net-core-2-0-preview-2/) and previous info [here](https://blogs.msdn.microsoft.com/dotnet/2017/05/10/announcing-net-core-2-0-preview-1/) for netcore 2.0 preview info
-- Possibly wiser to wait for official .NET standard 2 release at this time, see these links
-	- [Sample dotnet core 2.0 early usage](https://jeremylindsayni.wordpress.com/2017/04/02/installing-ubuntu-16-04-on-a-raspberry-pi-3-installing-net-core-2-and-running-a-sample-net-core-2-app/)
-	- [Core setup](https://github.com/dotnet/core-setup/)
-
+# dotnet as of August 2016
+- Get [here](https://www.microsoft.com/net/core#linuxubuntu) or [here](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-download.md)
 
 
 # Kubernetes

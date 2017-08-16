@@ -5,7 +5,7 @@ SHELL=/bin/bash
 # Parameters - defaulted
 DOCKERHUB_REPO_NAME ?= ${USER}
 IMAGE_NAME ?= webapi
-K8S_VERSION ?= 1.7.0
+K8S_VERSION ?= 1.7.3
 VERSION ?= 1.0
 
 
@@ -40,7 +40,7 @@ publish:
 	@# Remove the bin directory as it does not clear any existing content from previous runs
 	[[ -d bin ]] && rm -r bin || true
 	@# We do so for the project, if we do so for the solution it will include the test assemblies which we do not want in the docker image at this time
-	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../bin /property:Version=${VERSION} /property:FileVersion="${REPO_VERSION} - ${REPO_BRANCH}"
+	dotnet publish src/webapi/webapi.csproj --configuration Release --output ../../bin /property:Version=${VERSION} /property:FileVersion=${VERSION} /property:AssemblyInformationalVersion="${VERSION} - ${REPO_VERSION} - ${REPO_BRANCH}"
 
 
 pack:
